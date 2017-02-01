@@ -1,0 +1,6 @@
+C:\Users\McKay\Documents\CS4150\CeilingFunction\CeilingFunction\bin\Debug\CeilingFunction.exe.config
+C:\Users\McKay\Documents\CS4150\CeilingFunction\CeilingFunction\bin\Debug\CeilingFunction.exe
+C:\Users\McKay\Documents\CS4150\CeilingFunction\CeilingFunction\bin\Debug\CeilingFunction.pdb
+C:\Users\McKay\Documents\CS4150\CeilingFunction\CeilingFunction\obj\Debug\CeilingFunction.csprojResolveAssemblyReference.cache
+C:\Users\McKay\Documents\CS4150\CeilingFunction\CeilingFunction\obj\Debug\CeilingFunction.exe
+C:\Users\McKay\Documents\CS4150\CeilingFunction\CeilingFunction\obj\Debug\CeilingFunction.pdb

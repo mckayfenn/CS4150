@@ -1,0 +1,6 @@
+C:\Users\McKay\Documents\CS4150\MrAnaga\MrAnaga\bin\Debug\MrAnaga.exe.config
+C:\Users\McKay\Documents\CS4150\MrAnaga\MrAnaga\bin\Debug\MrAnaga.exe
+C:\Users\McKay\Documents\CS4150\MrAnaga\MrAnaga\bin\Debug\MrAnaga.pdb
+C:\Users\McKay\Documents\CS4150\MrAnaga\MrAnaga\obj\Debug\MrAnaga.csprojResolveAssemblyReference.cache
+C:\Users\McKay\Documents\CS4150\MrAnaga\MrAnaga\obj\Debug\MrAnaga.exe
+C:\Users\McKay\Documents\CS4150\MrAnaga\MrAnaga\obj\Debug\MrAnaga.pdb
