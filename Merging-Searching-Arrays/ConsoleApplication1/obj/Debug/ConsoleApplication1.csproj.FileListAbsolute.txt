@@ -7,3 +7,6 @@ C:\Users\McKay\Documents\CS4150\ConsoleApplication1\ConsoleApplication1\obj\Debu
 C:\Users\McKay\Documents\CS4150\Merging-Searching-Arrays\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
 C:\Users\McKay\Documents\CS4150\Merging-Searching-Arrays\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
 C:\Users\McKay\Documents\CS4150\Merging-Searching-Arrays\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
+C:\Users\McKay\Documents\CS4150\Merging-Searching-Arrays\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
+C:\Users\McKay\Documents\CS4150\Merging-Searching-Arrays\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
+C:\Users\McKay\Documents\CS4150\Merging-Searching-Arrays\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache
