@@ -18,24 +18,25 @@ namespace GalaxyQuest
             int count = 0;
             string line;
 
-            string[] testingData = new string[5];
-            //testingData[0] = "20 7";
-            //testingData[1] = "1 1";
-            //testingData[2] = "100 100";
-            //testingData[3] = "1 3";
-            //testingData[4] = "101 101";
-            //testingData[5] = "3 1";
-            //testingData[6] = "102 102";
-            //testingData[7] = "3 3";
+            string[] testingData = new string[8];
+            testingData[0] = "20 7";
+            testingData[1] = "1 1";
+            testingData[2] = "100 100";
+            testingData[3] = "1 3";
+            testingData[4] = "101 101";
+            testingData[5] = "3 1";
+            testingData[6] = "102 102";
+            testingData[7] = "3 3";
 
-            testingData[0] = "10 4";
-            testingData[1] = "45 46";
-            testingData[2] = "90 47";
-            testingData[3] = "45 54";
-            testingData[4] = "90 43";
+            //string[] testingData = new string[5];
+            //testingData[0] = "10 4";
+            //testingData[1] = "45 46";
+            //testingData[2] = "90 47";
+            //testingData[3] = "45 54";
+            //testingData[4] = "90 43";
 
             while ((line = Console.ReadLine()) != null)
-            //for(int i = 0; i < testingData.Length; i++)
+            //for (int i = 0; i < testingData.Length; i++)
             {
                 string[] xy = line.Split(null);
                 //string[] xy = testingData.ElementAt(i).Split(null);
@@ -72,7 +73,7 @@ namespace GalaxyQuest
                 }
             }
 
-            if(total != 0)
+            if (total != 0)
                 Console.WriteLine(total);
             //Console.ReadLine();
         }
@@ -163,6 +164,85 @@ namespace GalaxyQuest
 
                     else if (ycount > A.Count / 2)
                         return y;
+                    else
+                        return null;
+                }
+            }
+        }
+
+        public static Star findMajorityFaster(List<Star> A, long d)
+        {
+            if (A.Count == 0)
+                return null;
+            else if (A.Count == 1)
+                return A.ElementAt(0);
+            else
+            {
+                List<Star> APrime = new List<Star>();
+                Star y = null;
+
+                // Find A' and y
+                for (int i = 0; i < A.Count; i++)
+                {
+
+                    if (i + 1 < A.Count)
+                    {
+                        Star s1 = A.ElementAt(i);
+                        Star s2 = A.ElementAt(i + 1);
+                        if (distanceBetweenStars(s1, s2, d))
+                        {
+                            APrime.Add(s1); // if the elements are are same, keep 1 of them in APrime
+                        }
+                    }
+                    else
+                    {
+                        y = A.ElementAt(i); // if there's a leftover 
+                    }
+
+
+                }
+
+                Star x = findMajorityFaster(APrime, d);
+
+                if (x == null)
+                {
+                    // if A is odd, count occurrences of y in A, return y or NO as appropriate
+                    if (A.Count % 2 != 0)
+                    {
+                        // count occurences of y in A, return y or NO
+                        int count = 0;
+                        foreach (Star s2 in A)
+                        {
+                            if (distanceBetweenStars(y, s2, d))
+                            {
+                                count++;
+                            }
+                        }
+
+                        if (count > A.Count / 2)
+                            return y;
+                        else
+                            return null;
+                    }
+                    else
+                    {
+                        return null; // else return NO
+                    }
+                }
+                else
+                {
+                    // count occurences of x in A, return x or NO
+                    int count = 0;
+                    foreach (Star s2 in A)
+                    {
+                        if (distanceBetweenStars(x, s2, d))
+                        {
+                            count++;
+                        }
+                    }
+
+                    if (count > A.Count / 2)
+                        return x;
                     else
                         return null;
                 }
