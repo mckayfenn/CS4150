@@ -40,7 +40,7 @@ namespace GalaxyQuest
             findMajority(allStars);
         }
 
-        public static List<Star> findMajority(List<Star> A)
+        public static Star findMajority(List<Star> A)
         {
             if (A.Count == 0)
             {
@@ -48,7 +48,7 @@ namespace GalaxyQuest
             }
             else if (A.Count == 1)
             {
-                return A;
+                return A.ElementAt(0);
             }
             else
             {
@@ -62,8 +62,8 @@ namespace GalaxyQuest
                 {
                     secondHalf.Add(A.ElementAt(i));
                 }
-                List<Star> x = findMajority(firstHalf);
-                List<Star> y = findMajority(secondHalf);
+                Star x = findMajority(firstHalf);
+                Star y = findMajority(secondHalf);
 
                 if (x == null && y == null)
                     return null;
