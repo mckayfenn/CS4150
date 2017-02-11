@@ -35,24 +35,26 @@ namespace AutoSink
 
 
 
-            //string[] testingData = new string[17];
-            //testingData[0] = "4";
-            //testingData[1] = "Sourceville 5";
-            //testingData[2] = "SinkCity 10";
-            //testingData[3] = "Easton 20";
-            //testingData[4] = "Weston 15";
-            //testingData[5] = "4";
-            //testingData[6] = "Sourceville Easton";
-            //testingData[7] = "Sourceville Weston";
-            //testingData[8] = "Weston SinkCity";
-            //testingData[9] = "Easton SinkCity";
-            //testingData[10] = "6";
-            //testingData[11] = "Sourceville SinkCity";
-            //testingData[12] = "Easton SinkCity";
-            //testingData[13] = "SinkCity SinkCity";
-            //testingData[14] = "Weston Weston";
-            //testingData[15] = "Weston Sourceville";
-            //testingData[16] = "SinkCity Sourceville";
+            string[] testingData = new string[17];
+            testingData[0] = "4";
+            testingData[1] = "Sourceville 5";
+            testingData[2] = "SinkCity 10";
+            testingData[3] = "Easton 20";
+            testingData[4] = "Weston 15";
+            testingData[5] = "4";
+            testingData[6] = "Sourceville Easton";
+            testingData[7] = "Sourceville Weston";
+            testingData[8] = "Weston SinkCity";
+            testingData[9] = "Easton SinkCity";
+            testingData[10] = "6";
+            testingData[11] = "Sourceville SinkCity";
+            testingData[12] = "Easton SinkCity";
+            testingData[13] = "SinkCity SinkCity";
+            testingData[14] = "Weston Weston";
+            testingData[15] = "Weston Sourceville";
+            testingData[16] = "SinkCity Sourceville";
+
+            //string[] testingData = { "10", "A 5", "B 10", "D 15", "E 10", "C 25", "G 40", "F 30", "K 5", "Z 100", "Y 200", "9", "A B", "B D", "B E", "A C", "C G", "F G", "C K", "E K", "Z Y", "11", "A D", "A F", "B E", "A G", "B C", "A K", "Z Y", "K Y", "A Z", "Z Z", "B A" };
 
 
             //string[] testingData = new string[10];
@@ -93,12 +95,12 @@ namespace AutoSink
             //testingData[22] = "E F";
 
 
-            string[] testingData = new string[5];
-            testingData[0] = "1";
-            testingData[1] = "Here 10";
-            testingData[2] = "0";
-            testingData[3] = "1";
-            testingData[4] = "Here Here";
+            //string[] testingData = new string[5];
+            //testingData[0] = "1";
+            //testingData[1] = "Here 10";
+            //testingData[2] = "0";
+            //testingData[3] = "1";
+            //testingData[4] = "Here Here";
 
 
             Graph graph = new Graph();
@@ -115,25 +117,25 @@ namespace AutoSink
 
             int result = 0;
 
-            //while ((line = Console.ReadLine()) != null)
-            for (int i = 0; i < testingData.Length; i++)
+            while ((line = Console.ReadLine()) != null)
+            //for (int i = 0; i < testingData.Length; i++)
             {
-                if (Int32.TryParse(testingData[i], out result))
+                if (Int32.TryParse(line, out result))
                 {
                     if (areaCount == 0)
                     {
-                        //numOfCitites = Int32.Parse(line);
-                        numOfCitites = result;
+                        numOfCitites = Int32.Parse(line);
+                        //numOfCitites = result;
                     }
                     else if (areaCount == 1)
                     {
-                        //numOfHighways = Int32.Parse(line);
-                        numOfHighways = result;
+                        numOfHighways = Int32.Parse(line);
+                        //numOfHighways = result;
                     }
                     else if (areaCount == 2)
                     {
-                        //numOfTrips = Int32.Parse(line);
-                        numOfTrips = result;
+                        numOfTrips = Int32.Parse(line);
+                        //numOfTrips = result;
                     }
 
                     areaCount++;
@@ -143,8 +145,8 @@ namespace AutoSink
                     // it's a different line.
                     Vertex v1;
                     Vertex v2;
-                    //string[] data = line.Split(null);
-                    string[] data = testingData.ElementAt(i).Split(null);
+                    string[] data = line.Split(null);
+                    //string[] data = testingData.ElementAt(i).Split(null);
 
 
 
@@ -161,11 +163,26 @@ namespace AutoSink
                         if (v1 != null && v2 != null)
                             graph.addEdgeToVertex(v1, v2);
                         else
-                            Console.WriteLine("There's a problem trying to add an edge to a vertex");
+                        {
+                            //Console.WriteLine("There's a problem trying to add an edge to a vertex");
+                        }
                     }
-                    else if (areaCount == 3) // we are trying to see if a trip is valid
+                    else if (areaCount == 3 && lineCount < numOfTrips + numOfCitites + numOfHighways + 3) // we are trying to see if a trip is valid
                     {
+                        //depthFirstSearch(graph);
+                        //Vertex source = graph.getVertexWithName(data[0]);
+                        //bfs(graph, source);
+                        //Vertex sink = graph.getVertexWithName(data[1]);
+                        //if (sink.getDist() == Int32.MaxValue)
+                        //{
+                        //    Console.WriteLine("NO");
+                        //}
+                        //else
+                        //{
+                        //    Console.WriteLine(sink.getDist());
+                        //}
                         trips.Add(new Tuple<string, string>(data[0], data[1]));
+
                     }
                 }
 
@@ -190,6 +207,8 @@ namespace AutoSink
                 }
             }
 
+            //printTopoSort(graph);
+
             Console.ReadLine();
         }
 
@@ -202,10 +221,6 @@ namespace AutoSink
             }
         }
 
-        public static void printbfs()
-        {
-
-        }
 
         public static void depthFirstSearch(Graph g)
         {
@@ -260,6 +275,7 @@ namespace AutoSink
             {
                 // Get the next vertex from topological order
                 Vertex u = stack.Pop();
+                //Console.Write(u.getVertexName() + ", ");
 
                 if (u.getDist() != inf)
                 {
