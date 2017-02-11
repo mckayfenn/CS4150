@@ -104,10 +104,11 @@ namespace GalaxyQuest
                 Star x = findMajority(firstHalf, d);
                 Star y = findMajority(secondHalf, d);
 
-
-
                 if (x == null && y == null)
                     return null;
+
+
+
                 else if (x == null)
                 {
                     // count occurences of y in A, return y or NO
@@ -170,6 +171,7 @@ namespace GalaxyQuest
             }
         }
 
+        // not working correctly
         public static Star findMajorityFaster(List<Star> A, long d)
         {
             if (A.Count == 0)
