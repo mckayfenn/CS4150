@@ -30,29 +30,32 @@ namespace RumorMill
             int reports = 3000;
             int outResult = 0;
 
-            //while ((line = Console.ReadLine()) != null)
-            for (int i = 0; i < testingData.Length; i++)
+            while ((line = Console.ReadLine()) != null)
+            //for (int i = 0; i < testingData.Length; i++)
             {
-                if (Int32.TryParse(testingData.ElementAt(i), out outResult))
+                if (lineCount == 0 || lineCount == numOfStudents + 1 || lineCount == numOfStudents + friendPairs + 2 || lineCount == numOfStudents + friendPairs + reports + 3)
                 {
-                    if (areaCount == 0)
+                    if (Int32.TryParse(line, out outResult))
                     {
-                        numOfStudents = outResult;
+                        if (areaCount == 0)
+                        {
+                            numOfStudents = outResult;
+                        }
+                        else if (areaCount == 1)
+                        {
+                            friendPairs = outResult;
+                        }
+                        else if (areaCount == 2)
+                        {
+                            reports = outResult;
+                        }
+                        areaCount++;
                     }
-                    else if (areaCount == 1)
-                    {
-                        friendPairs = outResult;
-                    }
-                    else if (areaCount == 2)
-                    {
-                        reports = outResult;
-                    }
-                    areaCount++;
                 }
                 else
                 {
-                    //string[] data = line.Split(null);
-                    string[] data = testingData.ElementAt(i).Split(null);
+                    string[] data = line.Split(null);
+                    //string[] data = testingData.ElementAt(i).Split(null);
                     Vertex v1;
                     Vertex v2;
 
