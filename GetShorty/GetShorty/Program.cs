@@ -198,6 +198,8 @@ namespace GetShorty
             //    return firstMax;
             //}
 
+
+            // Remove the max from our hashset and return it 
             maxes.Remove(max);
             size--;
             return max;
@@ -243,6 +245,8 @@ namespace GetShorty
             //    maxes.Add(max);
             //}
 
+
+            // if it's a new max or greater than our old max update
             if (w > max.factor || !maxes.Contains(max))
             {
                 max = v;
