@@ -13,27 +13,23 @@ namespace GetShorty
             Program p = new Program();
 
 
-
-
             Dictionary<long, LinkedList<Node3>> graph = new Dictionary<long, LinkedList<Node3>>();
 
+            //string[] testingData = { "8 13", "0 1 0.1", "1 2 0.2", "2 3 0.1", "0 5 0.8", "1 6 0.6", "3 6 0.1", "0 4 0.4", "1 5 0.6", "2 6 0.2", "3 7 0.4", "4 5 0.5", "6 5 0.1", "6 7 0.1", "0 0" };
+            //string[] testingData = { "3 3", "0 2 0.8", "0 1 0.9", "1 2 0.9", "2 1", "1 0 1", "0 0" };
 
-            //string[] testingData = { "3 3", "0 1 0.9", "1 2 0.9", "0 2 0.8" };
-            //string[] testingData = { "8 13", "0 1 0.1", "1 2 0.2", "2 3 0.1", "0 5 0.8", "1 6 0.6", "3 6 0.1", "0 4 0.4", "1 5 0.6", "2 6 0.2", "3 7 0.4", "4 5 0.5", "6 5 0.1", "6 7 0.1" };
-            string[] testingData = { "3 3", "0 1 0.9", "1 2 0.9", "0 2 0.8", "2 1", "1 0 1", "0 0" };
+            string[] testingData = { "8 13", "0 1 0.1", "1 2 0.2", "2 3 0.1", "0 5 0.8", "1 6 0.6", "3 6 0.1", "0 4 0.4", "1 5 0.6", "2 6 0.2", "3 7 0.4", "4 5 0.5", "6 5 0.1", "6 7 0.1", "3 3", "0 2 0.8", "0 1 0.9", "1 2 0.9", "2 1", "1 0 1", "3 2", "0 2 0.5", "2 0 0.5", "3 1", "0 2 0.9", "5 4", "0 2 0.4", "0 3 0.7", "2 4 0.9", "3 4 0.8", "0 0" };
 
             string line;
             int lineCount = 0;
-            int areaCount = 0;
             int numOfIntersections = 0;
             int numOfCorridors = 0;
-            long outResult;
 
-            //while ((line = Console.ReadLine()) != null)
-            for (int i = 0; i < testingData.Length; i++)
+            while ((line = Console.ReadLine()) != null)
+            //for (int i = 0; i < testingData.Length; i++)
             {
-                //string[] data = line.Split(null);
-                string[] data = testingData.ElementAt(i).Split(null);
+                string[] data = line.Split(null);
+                //string[] data = testingData.ElementAt(i).Split(null);
 
 
                 if (data.Length == 2)
@@ -108,13 +104,20 @@ namespace GetShorty
 
             PriorityQueue pq = new PriorityQueue();
             pq.insertOrChange(new Node3(start), 1.0);
+            pq.firstTime();
 
             while (!pq.isEmpty())
             {
                 Node3 u = pq.deleteMax();
 
-                if (Math.Abs(u.factor - dist[u.next]) > 0.000001)
+
+                // Ignore this if we've already seen it
+                if (Math.Abs(u.factor - dist[u.next]) > 0.00000000000000001)
+                {
+                    pq.decrease();
                     continue;
+                }
+
 
                 LinkedList<Node3> edges = g[u.next];
                 foreach (Node3 v in edges)
@@ -125,7 +128,12 @@ namespace GetShorty
                     //    prev[v.next] = u;
                     //    pq.insertOrChange(v, dist[v.next]);
                     //}
-                    if (u.factor * v.factor > dist[v.next])
+                    //if (u.factor * v.factor > dist[v.next])
+                    //{
+                    //    dist[v.next] = u.factor * v.factor;
+                    //    pq.insertOrChange(new Node3(v.next), dist[v.next]);
+                    //}
+                    if (dist[v.next] < u.factor * v.factor)
                     {
                         dist[v.next] = u.factor * v.factor;
                         pq.insertOrChange(new Node3(v.next), dist[v.next]);
@@ -148,6 +156,12 @@ namespace GetShorty
     {
         List<Node3> list = new List<Node3>();
         HashSet<Node3> hash = new HashSet<Node3>();
+        Node3 max = new Node3();
+        int size = 0;
+        int first = 0;
+        Node3 firstMax;
+
+        HashSet<Node3> maxes = new HashSet<Node3>();
 
         public PriorityQueue()
         {
@@ -156,26 +170,48 @@ namespace GetShorty
 
         public bool isEmpty()
         {
-            return list.Count == 0;
+            return size == 0;
+            //return list.Count == 0;
         }
 
         public Node3 deleteMax()
         {
-            double maxVal = -1;
-            Node3 maxN = new Node3();
-            foreach (Node3 n in list)
-            {
-                if (n.factor > maxVal)
-                {
-                    maxVal = n.factor;
-                    maxN = n;
-                }
-            }
-            list.Remove(maxN);
-            hash.Remove(maxN);
-            return maxN;
+            //double maxVal = -1;
+            //Node3 maxN = new Node3();
+            //foreach (Node3 n in list)
+            //{
+            //    if (n.factor > maxVal)
+            //    {
+            //        maxVal = n.factor;
+            //        maxN = n;
+            //    }
+            //}
+            //list.Remove(maxN);
+            //hash.Remove(maxN);
+
+            //return maxN;
+
+            //if (first == 1)
+            //{
+            //    size--;
+            //    maxes.Remove(firstMax);
+            //    return firstMax;
+            //}
+
+            maxes.Remove(max);
+            size--;
+            return max;
         }
 
+        public void decrease()
+        {
+            size--;
+        }
+
+        public void firstTime()
+        {
+            first = 1;
+        }
 
         public void insertOrChange(Node3 v, double w)
         {
@@ -189,8 +225,35 @@ namespace GetShorty
             //    list.Add(v);
             //    hash.Add(v);
             //}
-            list.Add(v);
+
+            first++;
+
+
+            //if (first == 1)
+            //{
+            //    firstMax = v;
+            //    firstMax.factor = w;
+            //    max = new Node3();
+            //    maxes.Add(firstMax);
+            //}
+            //else if (w > max.factor || !maxes.Contains(max))
+            //{
+            //    max = v;
+            //    max.factor = w;
+            //    maxes.Add(max);
+            //}
+
+            if (w > max.factor || !maxes.Contains(max))
+            {
+                max = v;
+                max.factor = w;
+                maxes.Add(max);
+            }
+
+
+            size++;
             v.factor = w;
+            list.Add(v);
         }
     }
 
