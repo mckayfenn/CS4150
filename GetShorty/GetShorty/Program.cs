@@ -114,7 +114,7 @@ namespace GetShorty
                 // Ignore this if we've already seen it
                 if (Math.Abs(u.factor - dist[u.next]) > 0.00000000000000001)
                 {
-                    pq.decrease();
+                    pq.decrease(); 
                     continue;
                 }
 
