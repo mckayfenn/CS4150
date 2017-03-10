@@ -138,7 +138,7 @@ namespace NumberTheory
                 r = 15;
             else
                 r = rand.Next(int.Parse(n.ToString()));
-            for (int i = 1; i < r; i++)
+            for (int i = 1; i < 10; i++)
             {
                 if (modExp(new System.Numerics.BigInteger(i), n - 1, n) == 1)
                 {
