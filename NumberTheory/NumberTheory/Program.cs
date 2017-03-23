@@ -56,6 +56,7 @@
             Console.WriteLine(p.modExp(6, 5, 221));
             Console.WriteLine(p.modExp(11, 5, 221));
             Console.WriteLine(p.modExp(72, 77, 221));
+            Console.WriteLine(p.inverse(3, 616));
 
             Console.ReadLine();
         }
