@@ -19,42 +19,46 @@
 
                 string line;
 
-                while ((line = Console.ReadLine()) != null)
-                //for (int i = 0; i < testingData.Length; i++)
-                {
-                    string[] data = line.Split(null);
-                    //string[] data = testingData.ElementAt(i).Split(null);
+            //while ((line = Console.ReadLine()) != null)
+            //for (int i = 0; i < testingData.Length; i++)
+            //{
+            //    //string[] data = line.Split(null);
+            //    string[] data = testingData.ElementAt(i).Split(null);
 
-                    switch (data[0])
-                    {
-                        case "gcd":
-                            Console.WriteLine(p.gcd(System.Numerics.BigInteger.Parse(data[1]), System.Numerics.BigInteger.Parse(data[2])));
-                            break;
-                        case "exp":
-                            Console.WriteLine(p.modExp(System.Numerics.BigInteger.Parse(data[1]), System.Numerics.BigInteger.Parse(data[2]), System.Numerics.BigInteger.Parse(data[3])));
-                            break;
-                        case "inverse":
-                            System.Numerics.BigInteger inv = p.inverse(System.Numerics.BigInteger.Parse(data[1]), System.Numerics.BigInteger.Parse(data[2]));
-                            if (inv > 0)
-                                Console.WriteLine(inv);
-                            else
-                                Console.WriteLine("none");
-                            break;
-                        case "isprime":
-                            p.isPrime(System.Numerics.BigInteger.Parse(data[1]));
-                            break;
-                        case "key":
-                            p.rsaKey(System.Numerics.BigInteger.Parse(data[1]), System.Numerics.BigInteger.Parse(data[2]));
-                            break;
-                        default:
-                            // shouldn't do anything here
-                            break;
-                    }
-                }
+            //    switch (data[0])
+            //    {
+            //        case "gcd":
+            //            Console.WriteLine(p.gcd(System.Numerics.BigInteger.Parse(data[1]), System.Numerics.BigInteger.Parse(data[2])));
+            //            break;
+            //        case "exp":
+            //            Console.WriteLine(p.modExp(System.Numerics.BigInteger.Parse(data[1]), System.Numerics.BigInteger.Parse(data[2]), System.Numerics.BigInteger.Parse(data[3])));
+            //            break;
+            //        case "inverse":
+            //            System.Numerics.BigInteger inv = p.inverse(System.Numerics.BigInteger.Parse(data[1]), System.Numerics.BigInteger.Parse(data[2]));
+            //            if (inv > 0)
+            //                Console.WriteLine(inv);
+            //            else
+            //                Console.WriteLine("none");
+            //            break;
+            //        case "isprime":
+            //            p.isPrime(System.Numerics.BigInteger.Parse(data[1]));
+            //            break;
+            //        case "key":
+            //            p.rsaKey(System.Numerics.BigInteger.Parse(data[1]), System.Numerics.BigInteger.Parse(data[2]));
+            //            break;
+            //        default:
+            //            // shouldn't do anything here
+            //            break;
+            //    }
+            //}
 
-                Console.ReadLine();
-            }
+            Console.WriteLine(p.inverse(5, 192));
+            Console.WriteLine(p.modExp(6, 5, 221));
+            Console.WriteLine(p.modExp(11, 5, 221));
+            Console.WriteLine(p.modExp(72, 77, 221));
 
+            Console.ReadLine();
+        }
 
             /// <summary>
             /// Returns the greatest common divisor of a and b
