@@ -17,11 +17,11 @@ namespace UnderTheRainbow
             int lineCount = 0;
             string line;
 
-            //while ((line = Console.ReadLine()) != null)
-            for (int i = 0; i < testingData.Length; i++)
+            while ((line = Console.ReadLine()) != null)
+            //for (int i = 0; i < testingData.Length; i++)
             {
-                //string[] data = line.Split(null);
-                string[] data = testingData.ElementAt(i).Split(null);
+                string[] data = line.Split(null);
+                //string[] data = testingData.ElementAt(i).Split(null);
 
                 if (lineCount == 0)
                 {
@@ -39,74 +39,96 @@ namespace UnderTheRainbow
 
             Dictionary<long, long> cache = new Dictionary<long, long>();
 
-            Console.WriteLine(dynamicPenaltyF(dist, dist.Length - 1, cache));
+            Console.WriteLine(DynamicPenalty(dist));
 
             Console.ReadLine();
         }
 
-        private static long penalty(int[] dist)
+        //private static long penalty(int[] dist)
+        //{
+        //    long minPenalty = long.MaxValue;
+        //    for (int i = dist.Length - 1; i >= 0; i--)
+        //    {
+        //        minPenalty = Math.Min(minPenalty, penaltyF(dist, i));
+        //    }
+        //    return minPenalty;
+        //}
+
+        //private static long penaltyF(int[] dist, int n)
+        //{
+        //    long minPenalty = long.MaxValue;
+        //    for (int i = n; i >= 0; i--)
+        //    {
+        //        if (dist.Length - 1 == i)
+        //        {
+        //            minPenalty = 0;
+        //        }
+        //        long calculate = (400 - ((dist[n-i] - dist[i])*(dist[n-i] - dist[i])) + penaltyF(dist, n-i));
+        //        minPenalty = Math.Min(minPenalty, calculate);
+        //    }
+
+        //    return minPenalty;
+        //}
+
+        //private static long dynamicPenaltyF(int[] dist, int n, Dictionary<long, long> cache)
+        //{
+        //    long result;
+        //    if (cache.TryGetValue(n, out result)) {
+        //        return result;
+        //    }
+
+        //    long minPenalty = long.MaxValue;
+        //    for (int i = n; i >= 0; i--)
+        //    {
+        //        if (dist.Length - 1 == i)
+        //        {
+        //            minPenalty = 0;
+        //        }
+        //        long calculate = (400 - ((dist[n - i] - dist[i]) * (dist[n - i] - dist[i])) + dynamicPenaltyF(dist, n - i, cache));
+        //        minPenalty = Math.Min(minPenalty, calculate);
+        //    }
+
+        //    cache[n] = minPenalty;
+        //    return minPenalty;
+        //}
+
+
+        private static long DynamicPenalty(int[] dist)
         {
+            var cache = new Dictionary<long, long>();
             long minPenalty = long.MaxValue;
             for (int i = dist.Length - 1; i >= 0; i--)
             {
-                minPenalty = Math.Min(minPenalty, penaltyF(dist, i));
+                minPenalty = Math.Min(minPenalty, DynamicPenaltyF(dist, i, cache));
+                //minPenalty += DynamicPenaltyF(dist, i, cache);
             }
-            return minPenalty;
+            return cache.Last().Value;
         }
 
-        private static long penaltyF(int[] dist, int n)
+        private static long DynamicPenaltyF(int[] dist, int n, Dictionary<long, long> cache)
         {
             long minPenalty = long.MaxValue;
-            for (int i = n; i >= 0; i--)
-            {
-                if (dist.Length - 1 == i)
-                {
-                    minPenalty = 0;
-                }
-                long calculate = (400 - ((dist[n-i] - dist[i])*(dist[n-i] - dist[i])) + penaltyF(dist, n-i));
-                minPenalty = Math.Min(minPenalty, calculate);
-            }
-
-            return minPenalty;
-        }
-
-        private static long dynamicPenaltyF(int[] dist, int n, Dictionary<long, long> cache)
-        {
             long result;
-            if (cache.TryGetValue(n, out result)) {
+            if (cache.TryGetValue(n, out result))
+            {
                 return result;
             }
-
-            long minPenalty = long.MaxValue;
-            for (int i = n; i >= 0; i--)
+            else if (dist.Length - 1 == n)
             {
-                if (dist.Length - 1 == i)
+                return 0;
+            }
+            else
+            {
+
+                for (int i = (int)n + 1; i < dist.Length; i++)
                 {
-                    minPenalty = 0;
+                    long calculate = (long)Math.Pow(400 - (dist[i] - dist[n]), 2) + DynamicPenaltyF(dist, i, cache);
+                    minPenalty = Math.Min(minPenalty, calculate);
                 }
-                long calculate = (400 - ((dist[n - i] - dist[i]) * (dist[n - i] - dist[i])) + dynamicPenaltyF(dist, n - i, cache));
-                minPenalty = Math.Min(minPenalty, calculate);
+                cache[n] = minPenalty;
+                return minPenalty;
             }
 
-            cache[n] = minPenalty;
-            return minPenalty;
-        }
-
-
-        private static long dynamicPenalty(int[] dist)
-        {
-            var cache = new Dictionary<long, long>();
-            long minPenalty = 0;
-            for (int i = dist.Length -1; i >= 0; i--)
-            {
-                if (dist.Length - 1 == i)
-                {
-                    minPenalty = 0;
-                }
-                long calculate = (400 - ((dist[n - i] - dist[i]) * (dist[n - i] - dist[i])) + dynamicPenaltyF(dist, n - i, cache));
-                minPenalty = Math.Min(minPenalty, calculate);
-            }
-            
         }
     }
 }
