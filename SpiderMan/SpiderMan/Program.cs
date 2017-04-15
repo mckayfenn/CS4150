@@ -16,7 +16,10 @@ namespace SpiderMan
             //string[] testingData = { "1", "6", "3 2 5 3 1 2" };
             //string[] testingData = { "1", "7", "3 4 2 1 6 4 5" };
 
-            string[] testingData = { "3", "4", "20 20 20 20", "6", "3 2 5 3 1 2", "7", "3 4 2 1 6 4 5" };
+            //string[] testingData = { "3", "4", "20 20 20 20", "6", "3 2 5 3 1 2", "7", "3 4 2 1 6 4 5" };
+
+
+            string[] testingData = { "3", "1", "4", "31", "43 32 48 25 25 39 34 7 30 29 32 5 26 6 62 14 19 8 28 35 8 32 1 31 18 17 34 52 35 17 41", "30", "59 43 21 10 9 4 24 1 42 14 19 47 4 15 2 15 59 46 37 11 4 10 7 14 2 6 6 12 51 58" };
 
             List<Tuple<int, string>> answers = new List<Tuple<int, string>>();
 
@@ -27,11 +30,11 @@ namespace SpiderMan
 
             int[] distances = { };
 
-            while ((line = Console.ReadLine()) != null)
-            //for (int i = 0; i < testingData.Length; i++)
+            //while ((line = Console.ReadLine()) != null)
+            for (int i = 0; i < testingData.Length; i++)
             {
-                string[] data = line.Split(null);
-                //string[] data = testingData.ElementAt(i).Split(null);
+                //string[] data = line.Split(null);
+                string[] data = testingData.ElementAt(i).Split(null);
 
                 if (lineCount == 0)
                 {
@@ -74,12 +77,7 @@ namespace SpiderMan
                             }
                         }
                     }
-
-
                 }
-
-
-
 
                 lineCount++;
             }
