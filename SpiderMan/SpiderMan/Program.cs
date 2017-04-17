@@ -16,10 +16,10 @@ namespace SpiderMan
             //string[] testingData = { "1", "6", "3 2 5 3 1 2" };
             //string[] testingData = { "1", "7", "3 4 2 1 6 4 5" };
 
-            //string[] testingData = { "3", "4", "20 20 20 20", "6", "3 2 5 3 1 2", "7", "3 4 2 1 6 4 5" };
+            string[] testingData = { "3", "4", "20 20 20 20", "6", "3 2 5 3 1 2", "7", "3 4 2 1 6 4 5" };
 
 
-            string[] testingData = { "3", "1", "4", "31", "43 32 48 25 25 39 34 7 30 29 32 5 26 6 62 14 19 8 28 35 8 32 1 31 18 17 34 52 35 17 41", "30", "59 43 21 10 9 4 24 1 42 14 19 47 4 15 2 15 59 46 37 11 4 10 7 14 2 6 6 12 51 58" };
+            //string[] testingData = { "3", "1", "4", "31", "43 32 48 25 25 39 34 7 30 29 32 5 26 6 62 14 19 8 28 35 8 32 1 31 18 17 34 52 35 17 41", "30", "59 43 21 10 9 4 24 1 42 14 19 47 4 15 2 15 59 46 37 11 4 10 7 14 2 6 6 12 51 58" };
 
             List<Tuple<int, string>> answers = new List<Tuple<int, string>>();
 
@@ -49,12 +49,17 @@ namespace SpiderMan
                 }
                 else
                 {
+                    // put data into array
                     for (int j = 0; j < data.Length; j++)
                     {
                         distances[j] = int.Parse(data[j]);
                     }
+
+                    // solve the problem
                     solve(distances, 0, true, 0, 0, "U", answers);
 
+
+                    // print out results
                     if (answers.Count == 0)
                     {
                         Console.WriteLine("IMPOSSIBLE");
@@ -62,18 +67,20 @@ namespace SpiderMan
                     else
                     {
                         int min = int.MaxValue;
+
+                        // get the miniumum height
                         foreach (Tuple<int, string> val in answers)
                         {
                             min = Math.Min(val.Item1, min);
                         }
 
-                        bool hasAnswer = false;
+                        // print the path with the minimum height
                         foreach (Tuple<int, string> val in answers)
                         {
                             if (val.Item1 == min)
                             {
-                                hasAnswer = true;
                                 Console.WriteLine(val.Item2);
+                                break;
                             }
                         }
                     }
@@ -111,19 +118,29 @@ namespace SpiderMan
 
 
 
-
+        /// <summary>
+        /// Recursively solve it by going up and down at each point.
+        /// </summary>
+        /// <param name="dist"></param>
+        /// <param name="start"></param>
+        /// <param name="up"></param>
+        /// <param name="sum"></param>
+        /// <param name="maxHeight"></param>
+        /// <param name="path"></param>
+        /// <param name="answers"></param>
+        /// <returns></returns>
         public static int solve(int[] dist, int start, bool up, int sum, int maxHeight, string path, List<Tuple<int, string>> answers)
         {
             int currentSum;
             if (start == dist.Length - 1 && sum - dist[start] == 0 && !up)
             {
-                //Console.WriteLine("YES" + " " + maxHeight + " " + path);
-                answers.Add(new Tuple<int, string>(maxHeight, path));
+                Console.WriteLine("YES" + " " + maxHeight + " " + path);
+                answers.Add(new Tuple<int, string>(maxHeight, path)); // found a legal path so add it to the list of answers
                 return -1;
             }
             else if (start == dist.Length - 1)
             {
-                //Console.WriteLine("NO");
+                Console.WriteLine("NO " + maxHeight + " " + path);
                 return -1;
             }
             if (up)
@@ -132,7 +149,7 @@ namespace SpiderMan
                 maxHeight = Math.Max(currentSum, maxHeight);
                 string tmp = path + "U";
                 solve(dist, start + 1, true, currentSum, maxHeight, tmp, answers);
-                if (start + 1 <= dist.Length && (currentSum - dist[start + 1] >= 0))
+                if (start + 1 <= dist.Length && (currentSum - dist[start + 1] >= 0)) // only go down if its legal
                 {
                     string tmp2 = path + "D";
                     solve(dist, start + 1, false, currentSum, maxHeight, tmp2, answers);
@@ -144,7 +161,7 @@ namespace SpiderMan
                 maxHeight = Math.Max(currentSum, maxHeight);
                 string tmp = path + "U";
                 solve(dist, start + 1, true, currentSum, maxHeight, tmp, answers);
-                if (start + 1 <= dist.Length && (currentSum - dist[start + 1] >= 0))
+                if (start + 1 <= dist.Length && (currentSum - dist[start + 1] >= 0)) // only go down if its legal
                 {
                     string tmp2 = path + "D";
                     solve(dist, start + 1, false, currentSum, maxHeight, tmp2, answers);
